@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Diwali",
+    "subtitle": "Festival of Lights",
+    "image": "https://media.istockphoto.com/id/1351592257/photo/traditional-diya-lamps-lit-during-diwali-celebration.jpg",
+    "content": "Diwali celebrates the victory of light over darkness. It is observed by lighting lamps, bursting fireworks, and performing Lakshmi Puja. Families come together, clean homes, and enjoy sweets."
+  },
+  {
+    "id": 2,
+    "title": "Holi",
+    "subtitle": "Festival of Colors",
+    "image": "https://images.pexels.com/photos/8973684/pexels-photo-8973684.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    "content": "Holi marks the arrival of spring and symbolizes the triumph of good over evil. People play with colors, water balloons, and enjoy gujiya and thandai during this joyful celebration."
+  },
+  {
+    "id": 3,
+    "title": "Harvest Festivals",
+    "subtitle": "Uttarayan / Pongal / Bihu / Lohri",
+    "image": "https://i.pinimg.com/736x/5b/cb/22/5bcb22e37fb35bf83062331c6f537487.jpg",
+    "content": "These festivals express gratitude to nature and celebrate the harvest. Traditions vary: kite flying (Uttarayan), sweet rice cooking (Pongal), bonfires (Lohri), and cultural events (Bihu)."
+  }
+]

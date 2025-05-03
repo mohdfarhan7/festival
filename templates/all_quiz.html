@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">All Festivals Quiz</h1>
+    
+    <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 0%" id="progress-bar"></div>
+        </div>
+        
+        <form id="quiz-form" method="POST" action="{{ url_for('all_quiz') }}">
+            {% for question in questions %}
+            {% set qidx = loop.index0 %}
+            <div class="question-container" id="question-{{ qidx }}" style="display: none;">
+            <div class="card mb-4">
+                <div class="card-body">
+                        <h5 class="card-title">Question {{ loop.index }} of {{ questions|length }}</h5>
+                    <p class="card-text">{{ question.question }}</p>
+                    <div class="options-group">
+                        {% for option in question.options %}
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" 
+                                       name="answer_{{ qidx }}" 
+                                       id="q{{ qidx }}_opt{{ loop.index0 }}" 
+                                   value="{{ option }}"
+                                       {% if session.get('selected_answers', {}).get(qidx|string) == option %}checked{% endif %}>
+                                <label class="form-check-label" for="q{{ qidx }}_opt{{ loop.index0 }}">
+                                {{ option }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        <div class="navigation-buttons d-flex justify-content-between mb-4">
+            <button type="button" class="btn btn-secondary" id="prev-btn" style="display: none;">Previous</button>
+            <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+            <button type="submit" class="btn btn-success" id="submit-btn" style="display: none;">Submit Quiz</button>
+            </div>
+        </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const quizForm = document.getElementById('quiz-form');
+    const progressBar = document.getElementById('progress-bar');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    let currentQuestion = 0;
+    const totalQuestions = {{ questions|length }};
+    let selectedAnswers = {};
+    
+    function showQuestion(index) {
+        // Hide all questions
+        document.querySelectorAll('.question-container').forEach(q => q.style.display = 'none');
+        
+        // Show current question
+        document.getElementById(`question-${index}`).style.display = 'block';
+        
+        // Update progress bar
+        const progress = ((index + 1) / totalQuestions) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        // Update navigation buttons
+        prevBtn.style.display = index > 0 ? 'block' : 'none';
+        nextBtn.style.display = index < totalQuestions - 1 ? 'block' : 'none';
+        submitBtn.style.display = index === totalQuestions - 1 ? 'block' : 'none';
+    }
+    
+    // Show first question
+    showQuestion(0);
+    
+    prevBtn.addEventListener('click', function() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+            }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+        if (currentQuestion < totalQuestions - 1) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+        }
+    });
+    
+    // Save selected answers when changed
+    document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const questionIndex = this.name.split('_')[1];
+            const answer = this.value;
+            
+            // Store answer locally
+            selectedAnswers[questionIndex] = answer;
+            
+            // Send the selected answer to the server to store in session
+            fetch('/save_answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    question_index: questionIndex,
+                    answer: answer
+                })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      document.querySelectorAll(`input[name="answer_${questionIndex}"]`).forEach(radio => {
+                          radio.checked = (radio.value === answer);
+                      });
+                  }
+              });
+        });
+    });
+    
+    // Load any previously selected answers from session
+    {% if session.get('selected_answers') %}
+        const savedAnswers = {{ session.get('selected_answers')|tojson }};
+        for (const [questionIndex, answer] of Object.entries(savedAnswers)) {
+        document.querySelectorAll(`input[name="answer_${questionIndex}"]`).forEach(radio => {
+                radio.checked = (radio.value === answer);
+            });
+        }
+    {% endif %}
+});
+</script>
+{% endblock %} 

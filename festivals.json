@@ -1,0 +1,131 @@
+{
+  "diwali": {
+    "name": "Diwali",
+    "tagline": "Festival of Lights",
+    "image": "diwali.jpeg",
+    "sections": [
+      {
+        "title": "📖 Significance",
+        "content": "Diwali celebrates the victory of light over darkness and knowledge over ignorance."
+      },
+      {
+        "title": "✨ Rituals",
+        "content": "Lighting oil lamps (diyas), fireworks, Lakshmi Puja."
+      },
+      {
+        "title": "👗 Cuisine & Attire",
+        "content": "Traditional sweets like ladoo; attire: sarees, kurta-pajamas."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "What does Diwali symbolize?",
+        "type": "mcq",
+        "options": ["Victory of good over evil", "New Year celebration", "Spring harvest"],
+        "answer": "Victory of good over evil"
+      }
+    ]
+  },
+
+  "holi": {
+    "name": "Holi",
+    "tagline": "Festival of Colors",
+    "image": "holi.jpeg",
+    "sections": [
+      {
+        "title": "📖 History",
+        "content": "Holi marks the arrival of spring and triumph of good over evil."
+      },
+      {
+        "title": "✨ Customs",
+        "content": "Throwing colored powders (gulal), water balloons."
+      },
+      {
+        "title": "👗 Cuisine & Attire",
+        "content": "Gujiya, thandai; wear white to showcase colors."
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Primary activity during Holi?",
+        "type": "mcq",
+        "options": ["Playing with colors", "Fasting", "Planting trees"],
+        "answer": "Playing with colors"
+      }
+    ]
+  },
+
+  "harvest_festival": {
+    "name": "Harvest Festival",
+    "season": "Winter",
+    "tagline": "Uttarayan / Pongal / Magh Bihu / Lohri",
+    "image": "harvest_festival.png",
+    "phases": {
+      "2025-01-13": {
+        "title": "13 Jan: Lohri",
+        "details": "Evening bonfires in North."
+      },
+      "2025-01-14": {
+        "title": "14 Jan: Makar Sankranti / Pongal",
+        "details": "Kite flying in West; cooking sweet rice in South."
+      },
+      "2025-01-15": {
+        "title": "15 Jan: Magh Bihu",
+        "details": "Cultural performances & cattle celebrations."
+      }
+    },
+    "sections": [
+      { "title": "🌾 Other Names & Regions" },
+      {
+        "title": "📅 Timing",
+        "content": "<ul><li><strong>Approximate Dates:</strong> January 13–15</li></ul>"
+      },
+      {
+        "title": "📖 Significance",
+        "content": "<ul><li><strong>Celebrates:</strong> Harvest season & gratitude to nature</li><li><strong>Marks:</strong> Sun’s northward movement</li><li><strong>Importance:</strong> Beginning of longer, warmer days</li></ul>"
+      },
+      {
+        "title": "✨ Celebration Customs",
+        "content": "<ul><li><strong>Makar Sankranti / Uttarayan:</strong> Kite-flying competitions</li><li><strong>Pongal:</strong> Cooking sweet rice & honoring cows</li><li><strong>Magh Bihu:</strong> Traditional games & dances</li><li><strong>Lohri:</strong> Bonfires, singing & dancing</li></ul>"
+      }
+    ],
+    "flashcards": [
+      {
+        "region": "West India",
+        "title": "Uttarayan",
+        "color": "#A7C7E7",
+        "image": "https://i.pinimg.com/736x/82/52/0f/82520f430a2d44457ab302068e9e4b31.jpg",
+        "back_html": "<p>Also called Makar Sankranti.<br><br>Communities in <strong>West, North & Central India</strong> celebrate this.</p>"
+      },
+      {
+        "region": "South India",
+        "title": "Pongal",
+        "color": "#FF6961",
+        "image": "https://i.pinimg.com/736x/5b/cb/22/5bcb22e37fb35bf83062331c6f537487.jpg",
+        "back_html": "<p>Communities in <strong>South India</strong> celebrate this.</p>"
+      },
+      {
+        "region": "East India",
+        "title": "Magh Bihu",
+        "color": "#ECECEB",
+        "image": "https://as2.ftcdn.net/v2/jpg/01/67/13/93/1000_F_167139396_gh2htV95Eu7AsrcMERC9aM7JpnHZ9yog.jpg",
+        "back_html": "<p>Also called Bhogali Bihu.<br><br>Communities in <strong>East India</strong> celebrate this.</p>"
+      },
+      {
+        "region": "North India",
+        "title": "Lohri",
+        "color": "#C1E1C1",
+        "image": "https://i.pinimg.com/736x/e7/07/c5/e707c568aa174eae63e3fd677a81bb05.jpg",
+        "back_html": "<p>Communities in <strong>North India</strong> celebrate this.</p>"
+      }
+    ],
+    "quiz": [
+      {
+        "question": "Harvest Festival marks the transition from which season?",
+        "type": "mcq",
+        "options": ["End of Spring", "End of Summer", "End of Winter"],
+        "answer": "End of Winter"
+      }
+    ]
+  }
+}

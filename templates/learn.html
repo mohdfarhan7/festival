@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-4">{{ festival.name }}</h1>
+    
+    <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 0%" id="learning-progress"></div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div id="content-container">
+                {% for section in festival.sections %}
+                <div class="content-section" id="section-{{ loop.index0 }}" style="display: none;">
+                    <div class="card mb-4">
+                        <img src="{{ url_for('static', filename=section.image) }}" class="card-img-top" alt="{{ section.title }}">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ section.title }}</h3>
+                            <p class="card-text">{{ section.content|safe }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="navigation-buttons d-flex justify-content-between mb-4">
+                <button type="button" class="btn btn-secondary" id="prev-section" style="display: none;">Previous</button>
+                <button type="button" class="btn btn-primary" id="next-section">Next</button>
+                <a href="{{ url_for('quiz', festival_id=festival_id) }}" class="btn btn-success" id="start-quiz-btn" style="display: none;">Start Quiz</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.content-section');
+    const prevBtn = document.getElementById('prev-section');
+    const nextBtn = document.getElementById('next-section');
+    const startQuizBtn = document.getElementById('start-quiz-btn');
+    const progressBar = document.getElementById('learning-progress');
+    
+    let currentSection = 0;
+    const totalSections = sections.length;
+    
+    function showSection(index) {
+        // Hide all sections
+        sections.forEach(section => section.style.display = 'none');
+        
+        // Show current section
+        sections[index].style.display = 'block';
+        
+        // Update progress bar
+        const progress = ((index + 1) / totalSections) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        // Update navigation buttons
+        prevBtn.style.display = index > 0 ? 'block' : 'none';
+        nextBtn.style.display = index < totalSections - 1 ? 'block' : 'none';
+        startQuizBtn.style.display = index === totalSections - 1 ? 'block' : 'none';
+    }
+    
+    // Show first section
+    showSection(0);
+    
+    prevBtn.addEventListener('click', function() {
+        if (currentSection > 0) {
+            currentSection--;
+            showSection(currentSection);
+        }
+    });
+    
+    nextBtn.addEventListener('click', function() {
+        if (currentSection < totalSections - 1) {
+            currentSection++;
+            showSection(currentSection);
+        }
+    });
+    
+    // Save progress in localStorage
+    function saveProgress() {
+        localStorage.setItem(`festival_${'{{ festival.id }}'}_progress`, currentSection);
+    }
+    
+    // Load progress from localStorage
+    const savedProgress = localStorage.getItem(`festival_${'{{ festival.id }}'}_progress`);
+    if (savedProgress !== null) {
+        currentSection = parseInt(savedProgress);
+        showSection(currentSection);
+    }
+    
+    // Save progress when navigating
+    prevBtn.addEventListener('click', saveProgress);
+    nextBtn.addEventListener('click', saveProgress);
+});
+</script>
+
+<style>
+.content-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.navigation-buttons {
+    margin-top: 2rem;
+}
+</style>
+{% endblock %} 

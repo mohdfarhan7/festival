@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-5">Major Indian Festivals</h1>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for festival_id, festival in festivals.items() %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                <img src="{{ url_for('static', filename=festival.image) }}" class="card-img-top" alt="{{ festival.name }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ festival.name }}</h5>
+                    <p class="card-text">{{ festival.tagline }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="{{ url_for('learn', festival_id=festival_id) }}" class="btn btn-primary w-100">Learn More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    padding: 1rem 1.5rem;
+}
+</style>
+{% endblock %} 

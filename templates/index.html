@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <h1 class="display-4 mb-4">Welcome to Indian Festivals</h1>
+                    <p class="lead mb-4">Explore the rich cultural heritage of India through its major festivals</p>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button id="start-quiz" class="btn btn-primary btn-lg">Start Learning</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('start-quiz').addEventListener('click', function() {
+    window.location.href = "{{ url_for('home') }}";
+});
+</script>
+{% endblock %} 
